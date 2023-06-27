@@ -8,3 +8,7 @@ body{
 .icon_footer{
   width: 30px;
 }
+
+.card{
+  border-color: red;
+}

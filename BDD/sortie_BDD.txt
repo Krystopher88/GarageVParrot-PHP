@@ -1,0 +1,33 @@
+[Start] Executing MySQL query...
+undefined
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// Database initialization
+
+CREATE DATABASE vparrot_bdd' at line 1
+[Done] Finished MySQL query.
+[Start] Executing MySQL query...
+{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+[Done] Finished MySQL query.
+
+[Start] Executing MySQL query...
+undefined
+Error: ER_DB_CREATE_EXISTS: Can't create database 'vparrot_bdd'; database exists
+[Done] Finished MySQL query.
+[Start] Executing MySQL query...
+undefined
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '--CREATE DATABASE vparrot_bdd;
+--USE vparrot_bdd;
+
+--Create OpinionsTable
+
+DR...' at line 3
+[Done] Finished MySQL query.
+
+[Start] Executing MySQL query...
+undefined
+Error: ER_NO_DB_ERROR: No database selected
+[Done] Finished MySQL query.
+[Start] Executing MySQL query...
+[Done] Finished MySQL query.
+
+[Start] Executing MySQL query...
+[Done] Finished MySQL query.
