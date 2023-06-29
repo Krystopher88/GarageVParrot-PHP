@@ -1,96 +1,42 @@
-      <!-- SLIDER COMMENT START -->
-      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- SLIDER START CONTENT ONE -->
-          <div class="carousel-item active">
-            <div class="row justify-content-around">
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
+<div class="row col-lg-8">
+  <!-- SLIDER VISITOR COMMENTS START -->
+  <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- SLIDER START CONTENT -->
+      <?php 
+      $chunkedComments = array_chunk($comments, 3); // Divise les commentaires en groupes de 3 éléments
+      
+      foreach ($chunkedComments as $key => $chunk) {
+        $active = ($key == 0) ? 'active' : '';
+      ?>
+      <div class="carousel-item <?=$active ?>">
+        <div class="row justify-content-around">
+          <!-- CARD START -->
+          <?php foreach ($chunk as $comment) { ?>
+            <div class="card" style="width: 12rem;">
+              <div class="card-body">
+                <h5 class="card-title"><?= $comment['name']; ?></h5>
+                <p class="card-text"><?= $comment['opinion']; ?></p>
               </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
             </div>
-          </div>
-          <!-- SLIDER END CONTENT ONE -->
-          <!-- SLIDER START CONTENT TWO -->
-          <div class="carousel-item">
-            <div class="row justify-content-around">
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-            </div>
-          </div>
-          <!-- SLIDER END CONTENT TWO -->
-          <!-- SLIDER START CONTENT THREE -->
-          <div class="carousel-item">
-            <div class="row justify-content-around">
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Name</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-              <!-- CARD START -->
-              <div class="card" style="width: 12rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Namee</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-              <!-- CARD END -->
-            </div>
-          </div>
-          <!-- SLIDER END CONTENT THREE -->
+          <?php } ?>
+          <!-- CARD END -->
         </div>
       </div>
-      <!-- SLIDER COMMENT END -->
+      <?php } ?>
+      <!-- SLIDER END CONTENT -->
+    </div>
+  </div>
+  <!-- SLIDER VISITOR COMMENTS END -->
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- include('templates/slider_visitor_comments.php'); -->

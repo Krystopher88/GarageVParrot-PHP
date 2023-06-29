@@ -10,7 +10,7 @@
           <a class="navbar-brand col-lg-3 me-0" href="#"><img src="./assets/images/logo_header.png" alt="Logo d'entreprise" width="150px"></a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+              <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Mécanique</a>
@@ -19,7 +19,7 @@
               <a class="nav-link" href="#">Carosserie</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">Véhicules d'occasions</a>
+              <a class="nav-link" href="used_vehicles.php">Véhicules d'occasions</a>
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">

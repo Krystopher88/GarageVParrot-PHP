@@ -37,10 +37,25 @@ USE vparrot_bdd;
 
 -- Table insertion test `Used_Vehicles`
 
+-- INSERT INTO `Used_Vehicles` (`id`, `pictures`, `brand`, `model`, `mileage`, `fuel_type`, `year`, `price`) VALUES
+-- (1, NULL, 'Tesla', 'Model 3', 11000, 'Electrique', 2021, 47990),
+-- (2, NULL, 'Ferrari', '488 Spider', 8000, 'Essence', 2017, 278900),
+-- (3, NULL, 'Porsche', '718 Boxster', 17900, 'Essence', 2020, 47990),
+-- (4, NULL, 'Jaguar', 'XKR II', 113500, 'Essence', 2007, 31990),
+-- (5, NULL, 'Aston Martin', 'V8 Vantage', 43250, 'Essence', 2010, 66500),
+-- (6, NULL, 'Lamborghini', 'Urus', 50800, 'Essence', 2018, 239990);
+
+-- Table insertion test2 `OpinionsTable`
+
+-- INSERT INTO `OpinionsTable` (`id`, `name`, `opinion`) VALUES
+-- (4, 'Daniel', 'Belle secretaire'),
+-- (5, 'Moi', 'De belle voitures en vitrine'),
+-- (6, 'Ronchon2', 'Trop cher, pas de café offert');
+
+
+-- Table insertion test2 `Used_Vehicles`
+
 INSERT INTO `Used_Vehicles` (`id`, `pictures`, `brand`, `model`, `mileage`, `fuel_type`, `year`, `price`) VALUES
-(1, NULL, 'Tesla', 'Model 3', 11000, 'Electrique', 2021, 47990),
-(2, NULL, 'Ferrari', '488 Spider', 8000, 'Essence', 2017, 278900),
-(3, NULL, 'Porsche', '718 Boxster', 17900, 'Essence', 2020, 47990),
-(4, NULL, 'Jaguar', 'XKR II', 113500, 'Essence', 2007, 31990),
-(5, NULL, 'Aston Martin', 'V8 Vantage', 43250, 'Essence', 2010, 66500),
-(6, NULL, 'Lamborghini', 'Urus', 50800, 'Essence', 2018, 239990);
+(7, NULL, 'Bentley', 'Continental GT3', 180200, 'Essence', 2011, 59990),
+(8, NULL, 'Hummer', 'H1', 44800, 'Essence', 2000, 78900);
+

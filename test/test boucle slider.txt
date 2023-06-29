@@ -1,0 +1,21 @@
+<!-- SLIDER VISITOR COMMENTS START -->
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- SLIDER START CONTENT -->
+    <?php $chunkCount = ceil(count($comments) / $chunkSize); ?>
+    <?php for ($i = 0; $i < $chunkCount; $i++) { ?>
+      <div class="carousel-item <?php echo $i === 0 ? 'active' : ''; ?>">
+        <div class="row justify-content-around">
+          <!-- CARD START -->
+          <?php $chunk = array_slice($comments, $i * $chunkSize, $chunkSize); ?>
+          <?php foreach ($chunk as $comment) {
+            include('templates/slider_visitor_comments.php');
+          } ?>
+          <!-- CARD END -->
+        </div>
+      </div>
+    <?php } ?>
+    <!-- SLIDER END CONTENT -->
+  </div>
+</div>
+<!-- SLIDER VISITOR COMMENTS END -->
