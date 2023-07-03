@@ -55,7 +55,7 @@ USE vparrot_bdd;
 
 -- Table insertion test2 `Used_Vehicles`
 
-INSERT INTO `Used_Vehicles` (`id`, `pictures`, `brand`, `model`, `mileage`, `fuel_type`, `year`, `price`) VALUES
-(7, NULL, 'Bentley', 'Continental GT3', 180200, 'Essence', 2011, 59990),
-(8, NULL, 'Hummer', 'H1', 44800, 'Essence', 2000, 78900);
+-- INSERT INTO `Used_Vehicles` (`id`, `pictures`, `brand`, `model`, `mileage`, `fuel_type`, `year`, `price`) VALUES
+-- (7, NULL, 'Bentley', 'Continental GT3', 180200, 'Essence', 2011, 59990),
+-- (8, NULL, 'Hummer', 'H1', 44800, 'Essence', 2000, 78900);
 

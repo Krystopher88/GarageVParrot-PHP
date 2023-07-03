@@ -1,3 +1,7 @@
+<?php
+$UsedVehiculeSliders = getImportUsedVehicle($pdo);
+?>
+
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <!-- SLIDER USED VEHICLE START CONTENT ONE -->

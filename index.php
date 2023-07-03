@@ -1,8 +1,8 @@
 <?php
 require_once('templates/head.php');
 
-$comments = getImportComments($pdo);
-$UsedVehiculeSliders = getImportUsedVehicle($pdo);
+
+
 ?>
 
 

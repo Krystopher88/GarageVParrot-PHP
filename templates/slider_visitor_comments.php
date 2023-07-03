@@ -1,3 +1,7 @@
+<?php 
+$comments = getImportComments($pdo);
+?>
+
 <div class="row col-lg-8">
   <!-- SLIDER VISITOR COMMENTS START -->
   <div id="carousel" class="carousel slide" data-bs-ride="carousel">

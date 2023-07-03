@@ -27,5 +27,6 @@
         <li class="ms-3"><a class="text-body-secondary" href="#"><img src="./assets/icons/instagram.svg" alt="Logo Instagram" class="icon_footer"></a></li>
       </ul>
     </div>
+    <p>mettre copyright</p>
   </footer>
   <!-- FOOTER END -->
