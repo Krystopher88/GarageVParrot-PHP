@@ -3,7 +3,7 @@
 -- CREATE DATABASE vparrot_bdd;
 USE vparrot_bdd;
 
--- Create OpinionsTable
+-- Create OpinionsTable ---
 
 -- DROP TABLE IF EXISTS `OpinionsTable`;
 -- CREATE TABLE OpinionsTable (
@@ -13,14 +13,14 @@ USE vparrot_bdd;
 --   PRIMARY KEY(`id`)
 -- );
 
--- Table insertion test `OpinionsTable`
+-- Table insertion test `OpinionsTable` --
 
 -- INSERT INTO `OpinionsTable` (`id`, `name`, `opinion`) VALUES
 -- (1, 'Franck', 'Personnel accueillant'),
 -- (2, 'Celine', 'Magnifique garage'),
 -- (3, 'Ronchon', 'Je ne reviendrai pas');
 
--- Create Used_Vehicles table
+-- Create Used_Vehicles table --
 
 -- DROP TABLE IF EXISTS `Used_Vehicles`;
 -- CREATE TABLE Used_Vehicles (
@@ -35,7 +35,7 @@ USE vparrot_bdd;
 --   PRIMARY KEY(`id`)
 -- );
 
--- Table insertion test `Used_Vehicles`
+-- Table insertion test `Used_Vehicles` ---
 
 -- INSERT INTO `Used_Vehicles` (`id`, `pictures`, `brand`, `model`, `mileage`, `fuel_type`, `year`, `price`) VALUES
 -- (1, NULL, 'Tesla', 'Model 3', 11000, 'Electrique', 2021, 47990),

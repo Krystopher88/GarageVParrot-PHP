@@ -7,7 +7,7 @@
         </button>
 
         <div class="navbar-collapse d-lg-flex collapse" id="navbarsExample11">
-          <a class="navbar-brand col-lg-3 me-0" href="#"><img src="./assets/images/logo_header.png" alt="Logo d'entreprise" width="150px"></a>
+          <a class="navbar-brand col-lg-3 me-0" href="index.php"><img src="./assets/images/logo_header.png" alt="Logo d'entreprise" width="150px"></a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>

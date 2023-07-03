@@ -16,6 +16,8 @@ $brand = $_GET['brand'] ?? null;
 $fuel_type = $_GET['fuel_type'] ?? null;
 $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : '';
 $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : '';
+$minMileAge = isset($_GET['minMileage']) ? $_GET['minMileage'] : '';
+$maxMileAge = isset($_GET['maxMileage']) ? $_GET['maxMileage'] : '';
 $reset = isset($_GET['reset']);
 
 // Réinitialiser les filtres si le bouton "Réinitialiser" est cliqué
@@ -27,8 +29,8 @@ if ($reset) {
 }
 
 // Modifier cette ligne pour utiliser la fonction de filtrage appropriée
-if ($brand || $fuel_type || ($minPrice !== '' && $maxPrice !== '')) {
-  $UsedVehiculeSliders = getFilterUsedVehicle($pdo, $brand, $fuel_type, $minPrice, $maxPrice);
+if ($brand || $fuel_type || ($minPrice !== '' && $maxPrice !== '') || ($minMileAge !== '' && $maxMileAge !== '')) {
+  $UsedVehiculeSliders = getFilterUsedVehicle($pdo, $brand, $fuel_type, $minPrice, $maxPrice, $minMileAge, $maxMileAge);
 }
 ?>
 
@@ -61,33 +63,21 @@ if ($brand || $fuel_type || ($minPrice !== '' && $maxPrice !== '')) {
         <input type="hidden" id="minPrice" name="minPrice" value="<?= $minPrice ?>">
         <input type="hidden" id="maxPrice" name="maxPrice" value="<?= $maxPrice ?>">
         <div id="price-values"></div>
+        
+        <label for="price">Kilométrage :</label>
+        <div id="mileage-slider" class="mb-3"></div>
+        <input type="hidden" id="minMileage" name="minMileage" value="<?= $minMileage ?>">
+        <input type="hidden" id="maxMileage" name="maxMileage" value="<?= $maxMileage ?>">
+        <div id="mileage-values"></div>
+        
         <button type="submit" class="btn btn-warning m-2" name="reset" value="true">Réinitialiser</button>
         <button type="submit" class="btn btn-primary m-2">Valider</button>
       </form>
     </div>
     <!-- USED_VEHICLE START -->
-    <div class="col-8 p-3">
-      <div class="row justify-content-around">
-        <?php foreach ($UsedVehiculeSliders as $key => $UsedVehiculeSlider) { ?>
-          <div class="card mb-2 usedVechicled" style="width: 16rem">
-            <div class="card-header bg-transparent d-flex justify-content-between">
-              <h6 class="card-title"><?= $UsedVehiculeSlider['brand']; ?></h6>
-              <h6><?= $UsedVehiculeSlider['model']; ?></h6>
-            </div>
-            <img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">
-              <ul class="list-group">
-                <li class="list-group-item"><?= $UsedVehiculeSlider['mileage']; ?> km</li>
-                <li class="list-group-item"><?= $UsedVehiculeSlider['fuel_type']; ?></li>
-                <li class="list-group-item"><?= $UsedVehiculeSlider['year']; ?></li>
-              </ul>
-              </p>
-            </div>
-          </div>
-        <?php } ?>
-      </div>
-    </div>
+      <?php
+        include('templates/card_used_vehicles.php');
+      ?>
     <!-- USED_VEHICLE END -->
   </div>
 

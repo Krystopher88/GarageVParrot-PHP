@@ -48,7 +48,7 @@ function getImportUsedVehicle(PDO $pdo, int $limit = null)
   return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice)
+function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice, $minMileAge, $maxMileAge)
 {
   $sql = 'SELECT * FROM Used_Vehicles WHERE 1=1';
 
@@ -64,6 +64,10 @@ function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice
     $sql .= ' AND price BETWEEN :minPrice AND :maxPrice';
   }
 
+  if ($minMileAge !== '' && $maxMileAge !== '') {
+    $sql .= ' AND mileage BETWEEN :minMileAge AND :maxMileAge';
+  }
+
   $query = $pdo->prepare($sql);
 
   if ($brand) {
@@ -77,6 +81,11 @@ function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice
   if ($minPrice !== '' && $maxPrice !== '') {
     $query->bindParam(':minPrice', $minPrice, PDO::PARAM_INT);
     $query->bindParam(':maxPrice', $maxPrice, PDO::PARAM_INT);
+  }
+
+  if ($minMileAge !== '' && $maxMileAge !== '') {
+    $query->bindParam(':minMileAge', $minMileAge, PDO::PARAM_INT);
+    $query->bindParam(':maxMileAge', $maxMileAge, PDO::PARAM_INT);
   }
 
   $query->execute();
