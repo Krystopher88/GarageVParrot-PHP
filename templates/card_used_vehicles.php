@@ -15,6 +15,7 @@
                 <li class="list-group-item"><?= $UsedVehiculeSlider['year']; ?></li>
               </ul>
               </p>
+              <a href="./used_vehicle.php?id=<?=$UsedVehiculeSlider["id"]?>" class="btn btn-primary">Plus d'informations</a>
             </div>
           </div>
         <?php } ?>

@@ -29,9 +29,15 @@ function getImportComments(PDO $pdo, int $limit = null)
 
 // Import Used_Vehicle
 
-function getImportUsedVehicle(PDO $pdo, int $limit = null)
+function getImportUsedVehicle(PDO $pdo,int $id = null, int $limit = null)
 {
-  $sql = 'SELECT * FROM Used_Vehicles ORDER BY id DESC';
+  $sql = 'SELECT * FROM Used_Vehicles';
+
+  if($id){
+    $sql .= ' WHERE id = :id';
+  }else{
+    $sql .= ' ORDER BY id DESC';
+  }
 
   if ($limit) {
     $sql .= ' LIMIT :limit';
@@ -39,13 +45,22 @@ function getImportUsedVehicle(PDO $pdo, int $limit = null)
 
   $query = $pdo->prepare($sql);
 
+  if($id){
+    $query->bindParam(':id', $id, PDO::PARAM_INT);
+  }
+
+
   if ($limit) {
     $query->bindParam(':limit', $limit, PDO::PARAM_INT);
   }
 
   $query->execute();
 
-  return $query->fetchAll(PDO::FETCH_ASSOC);
+  if($id){
+    return $query->fetch(PDO::FETCH_ASSOC);
+  }else{
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
 
 function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice, $minMileAge, $maxMileAge)

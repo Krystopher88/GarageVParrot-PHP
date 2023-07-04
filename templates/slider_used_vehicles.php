@@ -16,7 +16,7 @@ $UsedVehiculeSliders = getImportUsedVehicle($pdo);
         <!-- CARD START -->
         <?php foreach ($chunk as $UsedVehiculeSlider) { ?>
           <div class="card" style="width: 18rem;">
-            <img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="card-img-top" alt="...">
+            <a href="used_vehicle.php?id=<?=$UsedVehiculeSlider["id"]?>"><img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <p class="card-text">
                 <ul class="list-group">

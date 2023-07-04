@@ -1,6 +1,7 @@
+//Start script range slider FilterSearch used_Vehicles 
 $(document).ready(function() {
   // Sélectionner l'élément du slider par son ID
-  var sliderPrice = $("#price-slider");
+  let sliderPrice = $("#price-slider");
 
   // Initialiser le slider avec les options appropriées
   sliderPrice.slider({
@@ -11,13 +12,13 @@ $(document).ready(function() {
     step: 1000, // Pas d'incrémentation du slider
     create: function() {
       // Ajouter des ronds personnalisés
-      var handles = sliderPrice.find(".ui-slider-handle");
+      let handles = sliderPrice.find(".ui-slider-handle");
       handles.eq(0).addClass("first-handle");
       handles.eq(1).addClass("second-handle");
       
       // Afficher les valeurs initiales du range dans la div
-      var minPrice = sliderPrice.slider("values", 0);
-      var maxPrice = sliderPrice.slider("values", 1);
+      let minPrice = sliderPrice.slider("values", 0);
+      let maxPrice = sliderPrice.slider("values", 1);
       $("#price-values").text(minPrice  + " € " + " - " + maxPrice  + " € ");
     },
     slide: function(event, ui) {
@@ -33,7 +34,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   // Sélectionner l'élément du slider par son ID
-  var sliderMileage = $("#mileage-slider");
+  let sliderMileage = $("#mileage-slider");
 
   // Initialiser le slider avec les options appropriées
   sliderMileage.slider({
@@ -44,13 +45,13 @@ $(document).ready(function() {
     step: 1000, // Pas d'incrémentation du slider
     create: function() {
       // Ajouter des ronds personnalisés
-      var handles = sliderMileage.find(".ui-slider-handle");
+      let handles = sliderMileage.find(".ui-slider-handle");
       handles.eq(0).addClass("first-handle");
       handles.eq(1).addClass("second-handle");
       
       // Afficher les valeurs initiales du range dans la div
-      var minMileage = sliderMileage.slider("values", 0);
-      var maxMileage = sliderMileage.slider("values", 1);
+      let minMileage = sliderMileage.slider("values", 0);
+      let maxMileage = sliderMileage.slider("values", 1);
       $("#mileage-values").text(minMileage + " km " + " - " + maxMileage + " km ");
     },
     slide: function(event, ui) {
@@ -63,3 +64,39 @@ $(document).ready(function() {
     }
   });
 });
+//End script range slider FilterSearch used_Vehicles 
+
+// //Start script card used_vehicle info and form
+$(document).ready(function() {
+  // Au chargement de la page, on cache le formulaire
+  $('#card_body_form').hide();
+
+  // Lorsque l'utilisateur clique sur un lien de la barre de navigation de la carte
+  $('.card-nav-link').click(function(event) {
+    event.preventDefault();
+
+    // On empêche la propagation de l'événement de clic
+    event.stopPropagation();
+
+    // On récupère l'ID de la cible à partir de l'attribut href
+    let target = $(this).attr('href');
+
+    // On affiche le contenu correspondant et on cache le reste
+    if (target === '#card_body_form') {
+      $('#card_body_info').hide();
+      $('#card_body_form').show();
+
+      // On active la classe active sur le lien du formulaire
+      $('.card-nav-link').removeClass('active');
+      $(this).addClass('active');
+    } else {
+      $('#card_body_info').show();
+      $('#card_body_form').hide();
+
+      // On active la classe active sur le lien des informations du véhicule
+      $('.card-nav-link').removeClass('active');
+      $('[href="#card_body_info"]').addClass('active');
+    }
+  });
+});
+// //End script card used_vehicle info and form
