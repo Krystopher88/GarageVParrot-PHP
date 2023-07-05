@@ -29,7 +29,7 @@ function getImportComments(PDO $pdo, int $limit = null)
 
 // Import Used_Vehicle
 
-function getImportUsedVehicle(PDO $pdo,int $id = null, int $limit = null)
+function getImportUsedVehicle(PDO $pdo, int $id = null, int $limit = null)
 {
   $sql = 'SELECT * FROM Used_Vehicles';
 
@@ -106,4 +106,39 @@ function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice
   $query->execute();
 
   return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getImportServices(PDO $pdo)
+{
+  $query = $pdo->prepare('SELECT * FROM category_id');
+  $query->execute();
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getImportServicesCard(PDO $pdo, $categoryId)
+{
+  $query = $pdo->prepare('SELECT * FROM service WHERE category_id = :categoryId');
+  $query->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+  $query->execute();
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getOpeningHours($pdo)
+{
+  $query = $pdo->prepare('SELECT day_of_week, opening_time, closing_time FROM opening_hours');
+  $query->execute();
+  $openingHours = array();
+
+  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    $dayOfWeek = $row['day_of_week'];
+    unset($row['day_of_week']);
+
+    if (!isset($openingHours[$dayOfWeek])) {
+      $openingHours[$dayOfWeek] = array();
+    }
+
+    $openingHours[$dayOfWeek][] = $row;
+  }
+
+  return $openingHours;
 }

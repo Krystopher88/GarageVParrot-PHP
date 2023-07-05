@@ -1,8 +1,5 @@
 <?php
 require_once('templates/head.php');
-
-
-
 ?>
 
 
@@ -22,13 +19,15 @@ require_once('templates/head.php');
           explicabo maxime, qui provident velit maiores praesentium voluptas aliquid vero impedit temporibus facere</p>
       </article>
     </div>
-    <?php 
-      include('templates/slider_visitor_comments.php');
+    <?php
+    include('templates/slider_visitor_comments.php');
     ?>
     <!-- CARD SERVICE START -->
-    <?php
-    require_once('templates/cards-services.php')
-    ?>
+    <div class="row align-items-stretch">
+        <?php
+        include('templates/cards-services.php');
+        ?>
+    </div>
     <!-- CARD SERVICE END -->
     <!-- SLIDER USED VEHICLE START -->
     <?php
@@ -45,6 +44,7 @@ require_once('templates/head.php');
 
 </body>
 <?php
-  require_once('lib/importLibs.php');
+require_once('lib/importLibs.php');
 ?>
+
 </html>

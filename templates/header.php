@@ -12,18 +12,18 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Mécanique</a>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="mechanical.php">Mécanique</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Carosserie</a>
-            </li>
+              <a class="nav-link" href="body_car.php">Carosserie</a>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" href="used_vehicles.php">Véhicules d'occasions</a>
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-primary">Contact</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>
           </div>
         </div>
       </div>

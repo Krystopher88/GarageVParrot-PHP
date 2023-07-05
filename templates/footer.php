@@ -1,15 +1,9 @@
   <!-- FOOTER START -->
   <footer class="d-flex flex-wrap justify-content-around align-items-center py-3 my-4 border-top text-center">
     <div class="col-md-4 d-flex align-items-center">
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2">Lundi : 08:45 - 12h00, 14:00 - 18:00</li>
-        <li class="nav-item mb-2">Mardi : 08:45 - 12h00, 14:00 - 18:00</li>
-        <li class="nav-item mb-2">Mercredi : 08:45 - 12h00, 14:00 - 18:00</li>
-        <li class="nav-item mb-2">Jeudi : 08:45 - 12h00, 14:00 - 18:00</li>
-        <li class="nav-item mb-2">Vendredi : 08:45 - 12h00, 14:00 - 18:00</li>
-        <li class="nav-item mb-2">Samedi : 08:45 - 12h00</a></li>
-        <li class="nav-item mb-2">Dimanche : Fermé</li>
-      </ul>
+      <?php
+        include('templates/opening_hours.php')
+      ?>
     </div>
 
     <div class="nav flex-column">

@@ -1,5 +1,6 @@
 <?php
-  require_once('lib/pdo.php')
+  require_once('lib/pdo.php');
+  include('templates/modal_contact.php');
 ?>
 
 <!DOCTYPE html>
