@@ -18,4 +18,12 @@ a{
   border-color: red;
 }
 
+#confirmationMessageContainer {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
 
