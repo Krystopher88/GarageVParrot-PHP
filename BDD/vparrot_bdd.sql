@@ -157,17 +157,33 @@ USE vparrot_bdd;
   --   PRIMARY KEY(`id`)
   -- )
 
-  INSERT INTO `opening_hours` (`day_of_week`, `opening_time`, `closing_time`) VALUES
-  ('Lundi', '08:45:00', '12:00:00'),
-  ('Lundi', '14:00:00', '18:00:00'),
-  ('Mardi', '08:45:00', '12:00:00'),
-  ('Mardi', '14:00:00', '18:00:00'),
-  ('Mercredi', '08:45:00', '12:00:00'),
-  ('Mercredi', '14:00:00', '18:00:00'),
-  ('Jeudi', '08:45:00', '12:00:00'),
-  ('Jeudi', '14:00:00', '18:00:00'),
-  ('Vendredi', '08:45:00', '12:00:00'),
-  ('Vendredi', '14:00:00', '18:00:00'),
-  ('Samedi', '08:45:00', '12:00:00'),
-  ('Dimanche', NULL, NULL)
+  -- INSERT INTO `opening_hours` (`day_of_week`, `opening_time`, `closing_time`) VALUES
+  -- ('Lundi', '08:45:00', '12:00:00'),
+  -- ('Lundi', '14:00:00', '18:00:00'),
+  -- ('Mardi', '08:45:00', '12:00:00'),
+  -- ('Mardi', '14:00:00', '18:00:00'),
+  -- ('Mercredi', '08:45:00', '12:00:00'),
+  -- ('Mercredi', '14:00:00', '18:00:00'),
+  -- ('Jeudi', '08:45:00', '12:00:00'),
+  -- ('Jeudi', '14:00:00', '18:00:00'),
+  -- ('Vendredi', '08:45:00', '12:00:00'),
+  -- ('Vendredi', '14:00:00', '18:00:00'),
+  -- ('Samedi', '08:45:00', '12:00:00'),
+  -- ('Dimanche', NULL, NULL)
   
+  -- DROP TABLE IF EXISTS `users`;
+  -- CREATE TABLE users(
+  --   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  --   `identifier` varchar(255) NOT NULL,
+  --   `password_hash` varchar(255) NOT NULL,
+  --   `email` varchar(255) NOT NULL,
+  --   `last_name` varchar(255) NOT NULL,
+  --   `first_name` varchar(255) NOT NULL,
+  --   `last_connexion` DATETIME,
+  --   `role` ENUM('employe', 'administrateur') NOT NULL,
+  --   PRIMARY KEY (`id`)
+  -- )
+
+  -- INSERT INTO `users` (`identifier`, `password_hash`, `email`, `last_name`, `first_name`, `role`) VALUES
+  -- ('vparrot', 'admin', 'vparrot@parrot.com', 'Parrot', 'Vincent', 'administrateur'),
+  -- ('sparrot', '1234', 'sparrot@parrot.com', 'Parrot', 'Sebastien', 'employe');

@@ -33,9 +33,9 @@ function getImportUsedVehicle(PDO $pdo, int $id = null, int $limit = null)
 {
   $sql = 'SELECT * FROM Used_Vehicles';
 
-  if($id){
+  if ($id) {
     $sql .= ' WHERE id = :id';
-  }else{
+  } else {
     $sql .= ' ORDER BY id DESC';
   }
 
@@ -45,7 +45,7 @@ function getImportUsedVehicle(PDO $pdo, int $id = null, int $limit = null)
 
   $query = $pdo->prepare($sql);
 
-  if($id){
+  if ($id) {
     $query->bindParam(':id', $id, PDO::PARAM_INT);
   }
 
@@ -56,9 +56,9 @@ function getImportUsedVehicle(PDO $pdo, int $id = null, int $limit = null)
 
   $query->execute();
 
-  if($id){
+  if ($id) {
     return $query->fetch(PDO::FETCH_ASSOC);
-  }else{
+  } else {
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 }
@@ -141,4 +141,24 @@ function getOpeningHours($pdo)
   }
 
   return $openingHours;
+}
+
+function login($identifiant, $password, $pdo)
+{
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $requete = $pdo->prepare("SELECT * FROM users WHERE identifier = :identifiant");
+    $requete->bindParam(':identifiant', $identifiant);
+    $requete->execute();
+
+    $user = $requete->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+      if ($password === $user['password_hash']) { // Comparaison du mot de passe non haché
+        $_SESSION['user'] = $user;
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
