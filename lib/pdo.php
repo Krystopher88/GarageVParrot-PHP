@@ -1,7 +1,14 @@
 <!-- Connection to the DB -->
 
 <?php
-$pdo = new PDO('mysql:dbname=vparrot_bdd;host=localhost;charset=utf8mb4', 'krystdev', 'phw5una7');
+// Connexion à la base de données avec les options pour activer les exceptions
+try {
+  $pdo = new PDO('mysql:dbname=vparrot_bdd;host=localhost;charset=utf8mb4', 'krystdev', 'phw5una7', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+} catch (PDOException $e) {
+  // En cas d'erreur de connexion, affiche l'erreur complète
+  die('Erreur de connexion à la base de données : ' . $e->getMessage());
+}
+
 
 // Import Comments Start
 //Rajouter une limites de commentaire à afficher
@@ -155,6 +162,13 @@ function login($identifiant, $password, $pdo)
     if ($user) {
       if ($password === $user['password_hash']) { // Comparaison du mot de passe non haché
         $_SESSION['user'] = $user;
+
+        // Mettre à jour la date et l'heure de connexion dans la base de données
+        $updateQuery = $pdo->prepare("UPDATE users SET last_connexion = :last_connexion WHERE id = :user_id");
+        $updateQuery->bindParam(':last_connexion', date('Y-m-d H:i:s'));
+        $updateQuery->bindParam(':user_id', $user['id'], PDO::PARAM_INT);
+        $updateQuery->execute();
+
         return true;
       }
     }
@@ -162,3 +176,80 @@ function login($identifiant, $password, $pdo)
     return false;
   }
 }
+
+
+
+function createUser($identifier, $password, $email, $lastName, $firstName, $role, $pdo) {
+  $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = $pdo->prepare('INSERT INTO users (identifier, password_hash, email, last_name, first_name, role) 
+  VALUES (:identifier, :password_hash, :email, :last_name, :first_name, :role)');
+  $query->bindParam(':identifier', $identifier);
+  $query->bindParam(':password_hash', $passwordHash);
+  $query->bindParam(':email', $email);
+  $query->bindParam(':last_name', $lastName);
+  $query->bindParam(':first_name', $firstName);
+  $query->bindParam(':role', $role);
+
+  return $query->execute();
+}
+
+function getAllUsers(PDO $pdo, $limit = null) {
+  $sql = "SELECT id, role, last_name, first_name, last_connexion, identifier, email FROM users";
+
+  if ($limit !== null) {
+    $sql .= " LIMIT :limit";
+  }
+
+  $query = $pdo->prepare($sql);
+
+  if ($limit !== null) {
+    $query->bindValue(':limit', $limit, PDO::PARAM_INT);
+  }
+
+  $query->execute();
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function getUserById(PDO $pdo, $id) {
+  $sql = "SELECT id, role, last_name, first_name, last_connexion, identifier, email FROM users WHERE id = :id";
+  $query = $pdo->prepare($sql);
+  $query->bindValue(':id', $id, PDO::PARAM_INT);
+  return $query->execute();
+  // return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
+
+function deleteUser(PDO $pdo, $user_id)
+{
+  $query = $pdo->prepare("DELETE FROM users WHERE id = :user_id");
+  $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+  return $query->execute();
+}
+
+function updateUser($user_id, $identifier, $password, $email, $lastName, $firstName, $pdo)
+{
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $query = $pdo->prepare('UPDATE users SET identifier = :identifier, password_hash = :password_hash, email = :email, last_name = :last_name, first_name = :first_name  WHERE id = :user_id');
+        $query->bindParam(':identifier', $identifier);
+        $query->bindParam(':password_hash', $passwordHash);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':last_name', $lastName);
+        $query->bindParam(':first_name', $firstName);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+        $success = $query->execute();
+
+        return $success;
+    } catch (PDOException $e) {
+        // Affiche l'erreur complète en cas d'échec de la requête
+        echo 'Erreur dans la requête updateUser : ' . $e->getMessage();
+        return false;
+    }
+}
+
