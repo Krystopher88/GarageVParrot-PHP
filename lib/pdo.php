@@ -1,6 +1,7 @@
 <!-- Connection to the DB -->
 
 <?php
+require_once(__DIR__ . '/../config.php');
 // Connexion à la base de données avec les options pour activer les exceptions
 try {
   $pdo = new PDO('mysql:dbname=vparrot_bdd;host=localhost;charset=utf8mb4', 'krystdev', 'phw5una7', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -38,37 +39,41 @@ function getImportComments(PDO $pdo, int $limit = null)
 
 function getImportUsedVehicle(PDO $pdo, int $id = null, int $limit = null)
 {
-  $sql = 'SELECT * FROM Used_Vehicles';
+    $sql = 'SELECT *, COALESCE(pictures, :defaultImage) AS image FROM Used_Vehicles';
 
-  if ($id) {
-    $sql .= ' WHERE id = :id';
-  } else {
-    $sql .= ' ORDER BY id DESC';
-  }
+    if ($id) {
+        $sql .= ' WHERE id = :id';
+    } else {
+        $sql .= ' ORDER BY id DESC';
+    }
 
-  if ($limit) {
-    $sql .= ' LIMIT :limit';
-  }
+    if ($limit) {
+        $sql .= ' LIMIT :limit';
+    }
 
-  $query = $pdo->prepare($sql);
+    $query = $pdo->prepare($sql);
 
-  if ($id) {
-    $query->bindParam(':id', $id, PDO::PARAM_INT);
-  }
+    // Définir l'image par défaut
+    $defaultImage = './assets/images/default_vehicle_image.jpg';
+    $query->bindParam(':defaultImage', $defaultImage, PDO::PARAM_STR);
 
+    if ($id) {
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+    }
 
-  if ($limit) {
-    $query->bindParam(':limit', $limit, PDO::PARAM_INT);
-  }
+    if ($limit) {
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+    }
 
-  $query->execute();
+    $query->execute();
 
-  if ($id) {
-    return $query->fetch(PDO::FETCH_ASSOC);
-  } else {
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-  }
+    if ($id) {
+        return $query->fetch(PDO::FETCH_ASSOC);
+    } else {
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+
 
 function getFilterUsedVehicle(PDO $pdo, $brand, $fuel_type, $minPrice, $maxPrice, $minMileAge, $maxMileAge)
 {
@@ -216,11 +221,9 @@ function getUserById(PDO $pdo, $id) {
   $sql = "SELECT id, role, last_name, first_name, last_connexion, identifier, email FROM users WHERE id = :id";
   $query = $pdo->prepare($sql);
   $query->bindValue(':id', $id, PDO::PARAM_INT);
-  return $query->execute();
-  // return $query->fetch(PDO::FETCH_ASSOC);
+  $query->execute();
+  return $query->fetch(PDO::FETCH_ASSOC);
 }
-
-
 
 
 function deleteUser(PDO $pdo, $user_id)
@@ -251,5 +254,122 @@ function updateUser($user_id, $identifier, $password, $email, $lastName, $firstN
         echo 'Erreur dans la requête updateUser : ' . $e->getMessage();
         return false;
     }
+}
+
+function insertUsedVehicle(PDO $pdo, $brand, $model, $mileage, $fuel_type, $year, $price, $picture_tmp_name, $picture_name)
+{
+  // Vérification des données et préparation de la requête SQL
+  $sql = 'INSERT INTO Used_Vehicles (pictures, brand, model, mileage, fuel_type, year, price) VALUES (:pictures, :brand, :model, :mileage, :fuel_type, :year, :price)';
+  $query = $pdo->prepare($sql);
+
+  // Gérer le téléchargement de l'image et stocker le lien
+  $filename = uniqid() . '_' . basename($picture_name);
+  $destination = UPLOADS_DIR . $filename;
+
+  if (move_uploaded_file($picture_tmp_name, $destination)) {
+    $pictureLink = './uploads/img_used_vehicle/' . $filename;
+  } else {
+    // Afficher un message d'erreur si le téléchargement de l'image a échoué
+    die("Une erreur s'est produite lors du téléchargement de l'image.");
+  }
+
+  // Liage des paramètres
+  $query->bindParam(':pictures', $pictureLink, PDO::PARAM_STR);
+  $query->bindParam(':brand', $brand, PDO::PARAM_STR);
+  $query->bindParam(':model', $model, PDO::PARAM_STR);
+  $query->bindParam(':mileage', $mileage, PDO::PARAM_INT);
+  $query->bindParam(':fuel_type', $fuel_type, PDO::PARAM_STR);
+  $query->bindParam(':year', $year, PDO::PARAM_INT);
+  $query->bindParam(':price', $price, PDO::PARAM_INT);
+
+  // Exécution de la requête
+  $query->execute();
+
+  // Retourner l'ID du nouvel enregistrement
+  return $pdo->lastInsertId();
+}
+
+function deleteUsedVehicle(PDO $pdo, $used_vehicle_id)
+{
+  $query = $pdo->prepare("DELETE FROM Used_Vehicles WHERE id = :used_vehicle_id");
+  $query->bindParam(':used_vehicle_id', $used_vehicle_id, PDO::PARAM_INT);
+  return $query->execute();
+}
+
+
+function updateUsedVehicle(PDO $pdo, $vehicle_id, $brand, $model, $mileage, $fuel_type, $year, $price, $picture_tmp_name = null, $picture_name = null)
+{
+    // Récupérer l'ancienne image de la base de données (s'il y en a une)
+    $oldPictureLink = '';
+    $queryOldImage = $pdo->prepare('SELECT pictures FROM Used_Vehicles WHERE id = :vehicle_id');
+    $queryOldImage->bindParam(':vehicle_id', $vehicle_id, PDO::PARAM_INT);
+    $queryOldImage->execute();
+
+    if ($row = $queryOldImage->fetch(PDO::FETCH_ASSOC)) {
+        $oldPictureLink = $row['pictures'];
+    }
+
+    // Vérification des données et préparation de la requête SQL
+    $sql = 'UPDATE Used_Vehicles SET brand = :brand, model = :model, mileage = :mileage, fuel_type = :fuel_type, year = :year, price = :price';
+
+    // Supprimer l'ancienne image de la base de données si elle existe
+    if ($oldPictureLink) {
+        // Supprimer le fichier de l'ancienne image sur le serveur
+        $oldImageFilename = basename($oldPictureLink);
+        $oldImagePath = UPLOADS_DIR . $oldImageFilename;
+        if (file_exists($oldImagePath)) {
+            unlink($oldImagePath);
+        }
+    }
+
+    // Gérer le téléchargement de la nouvelle image et mettre à jour le lien si une nouvelle image est fournie
+    if ($picture_tmp_name && $picture_name) {
+        $filename = uniqid() . '_' . basename($picture_name);
+        $destination = UPLOADS_DIR . $filename;
+
+        if (move_uploaded_file($picture_tmp_name, $destination)) {
+            $pictureLink = './uploads/img_used_vehicle/' . $filename;
+            $sql .= ', pictures = :pictures';
+        } else {
+            // Afficher un message d'erreur si le téléchargement de la nouvelle image a échoué
+            die("Une erreur s'est produite lors du téléchargement de la nouvelle image.");
+        }
+    }
+
+    $sql .= ' WHERE id = :vehicle_id';
+
+    $query = $pdo->prepare($sql);
+
+    // Liage des paramètres de la requête
+    $query->bindParam(':brand', $brand, PDO::PARAM_STR);
+    $query->bindParam(':model', $model, PDO::PARAM_STR);
+    $query->bindParam(':mileage', $mileage, PDO::PARAM_INT);
+    $query->bindParam(':fuel_type', $fuel_type, PDO::PARAM_STR);
+    $query->bindParam(':year', $year, PDO::PARAM_INT);
+    $query->bindParam(':price', $price, PDO::PARAM_INT);
+    $query->bindParam(':vehicle_id', $vehicle_id, PDO::PARAM_INT);
+
+    // Liage du paramètre de la nouvelle image si une nouvelle image a été fournie
+    if ($picture_tmp_name && $picture_name) {
+        $query->bindParam(':pictures', $pictureLink, PDO::PARAM_STR);
+    }
+
+    // Exécution de la requête
+    try {
+        $query->execute();
+        return true; // Retourne true si la mise à jour a réussi
+    } catch (PDOException $e) {
+        // Gérer l'erreur si la mise à jour échoue
+        echo "Erreur lors de la mise à jour du véhicule : " . $e->getMessage();
+        return false; // Retourne false en cas d'erreur
+    }
+}
+
+function getVehicleById(PDO $pdo, $id) {
+  $sql = 'SELECT id, pictures, brand, model, mileage, fuel_type, year, price FROM Used_Vehicles WHERE id = :id';
+  $query = $pdo->prepare($sql);
+  $query->bindParam(':id', $id, PDO::PARAM_INT);
+  $query->execute();
+  return $query->fetch(PDO::FETCH_ASSOC);
 }
 

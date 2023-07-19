@@ -1,5 +1,6 @@
 <?php
 $UsedVehiculeSliders = getImportUsedVehicle($pdo);
+var_dump($defaultImage);
 ?>
 
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -16,7 +17,7 @@ $UsedVehiculeSliders = getImportUsedVehicle($pdo);
         <!-- CARD START -->
         <?php foreach ($chunk as $UsedVehiculeSlider) { ?>
           <div class="card" style="width: 18rem;">
-            <a href="used_vehicle.php?id=<?=$UsedVehiculeSlider["id"]?>"><img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="card-img-top" alt="..."></a>
+            <a href="used_vehicle.php?id=<?=$UsedVehiculeSlider["id"]?>"><img src="<?= $UsedVehiculeSlider['image']; ?>" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <p class="card-text">
                 <ul class="list-group">

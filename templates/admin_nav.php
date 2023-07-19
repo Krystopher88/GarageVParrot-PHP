@@ -19,7 +19,7 @@
                 <a class="nav-link" href="#">Gestions des avis</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Gestions des Véhicules</a>
+                <a class="nav-link" href="admin_used_vehicled.php">Gestions des Véhicules</a>
               </li>
             <?php
             if ($role === 'administrateur') {

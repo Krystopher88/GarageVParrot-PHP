@@ -4,6 +4,7 @@
 <script src="./assets/JS/script.js"></script>
 <script src="./assets/JS/modal_contact.js"></script>
 <script src="./assets/JS/modal_confirm_shedule_days.js"></script>
-<!-- <script src="./assets/JS/verify_shedule_form.js"></script> -->
+<script src="./assets/JS/verify_shedule_form.js"></script>
 <script src="./assets/JS/form_create_user.js"></script>
 <script defer src="./assets/JS/form_update_user.js"></script>
+<script defer src="./assets/JS/form_update_vehicle.js"></script>

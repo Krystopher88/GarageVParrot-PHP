@@ -23,7 +23,7 @@ if (isset($_POST['id'])) {
       </div>
       <div class="modal-body">
         <form action="lib/update_account.php" method="POST">
-          <input type="text" id="editUserId" name="userId" value="<?= $employee['id'] ?>">
+          <input type="hidden" id="editUserId" name="userId" value="<?= $employee['id'] ?>">
           <div class="mb-3">
             <label for="editIdentifier" class="form-label">Identifiant</label>
             <input type="text" class="form-control" id="editIdentifier" name="identifier" placeholder="<?= $employee['identifier'] ?>">

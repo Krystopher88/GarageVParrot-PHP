@@ -187,3 +187,6 @@ USE vparrot_bdd;
   -- INSERT INTO `users` (`identifier`, `password_hash`, `email`, `last_name`, `first_name`, `role`) VALUES
   -- ('vparrot', 'admin', 'vparrot@parrot.com', 'Parrot', 'Vincent', 'administrateur'),
   -- ('sparrot', '1234', 'sparrot@parrot.com', 'Parrot', 'Sebastien', 'employe');
+
+ALTER TABLE OpinionsTable ADD COLUMN `note` INT(11) NOT NULL DEFAULT 0;
+

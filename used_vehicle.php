@@ -29,7 +29,7 @@ $UsedVehiculeSliders = getImportUsedVehicle($pdo, $id);
           </ul>
         </div>
         <div class="col-md-4">
-          <img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="img-fluid rounded-start" alt="...">
+          <img src="<?= $UsedVehiculeSliders['image']; ?>" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
           <div class="card-body" id="card_body_info">

@@ -6,7 +6,7 @@
               <h6 class="card-title"><?= $UsedVehiculeSlider['brand']; ?></h6>
               <h6><?= $UsedVehiculeSlider['model']; ?></h6>
             </div>
-            <img src="./uploads/img_used_vehicle/E111803730_STANDARD_0.jpg" class="card-img-top" alt="...">
+            <img src="<?= $UsedVehiculeSlider['image']; ?>" class="card-img-top" alt="...">
             <div class="card-body">
               <p class="card-text">
               <ul class="list-group">
