@@ -22,7 +22,7 @@
                 <a class="nav-link" href="admin_used_vehicled.php">Véhicules</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Messagerie</a>
+                <a class="nav-link" href="admin_messaging.php">Messagerie</a>
               </li>
             <?php
             if ($role === 'administrateur') {
@@ -32,9 +32,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="admin_account_management.php">Employés</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
               </li>
           <?php
             }

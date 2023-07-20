@@ -450,3 +450,44 @@ function insertComment(PDO $pdo, $name, $opinion, $note)
         return false; // Retourner false en cas d'erreur
     }
 }
+
+function insertMessage(PDO $pdo, $phoneNumber, $email, $lastName, $firstName, $message)
+{
+    // Préparer la requête SQL
+    $sql = 'INSERT INTO messaging (phoneNumber, email, last_name, first_name, message) VALUES (:phoneNumber, :email, :lastName, :firstName, :message)';
+    $query = $pdo->prepare($sql);
+
+    // Lier les paramètres de la requête
+    $query->bindParam(':phoneNumber', $phoneNumber, PDO::PARAM_STR);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
+    $query->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+    $query->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+    $query->bindParam(':message', $message, PDO::PARAM_STR);
+
+    // Exécuter la requête
+    try {
+        $query->execute();
+        return true; // Retourner true si l'insertion a réussi
+    } catch (PDOException $e) {
+        // Gérer l'erreur si l'insertion échoue
+        echo "Erreur lors de l'insertion du message : " . $e->getMessage();
+        return false; // Retourner false en cas d'erreur
+    }
+}
+
+function getAllMessage(PDO $pdo, $limit = null) {
+  $sql = "SELECT * FROM messaging";
+
+  if ($limit !== null) {
+    $sql .= " LIMIT :limit";
+  }
+
+  $query = $pdo->prepare($sql);
+
+  if ($limit !== null) {
+    $query->bindValue(':limit', $limit, PDO::PARAM_INT);
+  }
+
+  $query->execute();
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}

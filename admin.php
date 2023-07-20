@@ -35,10 +35,15 @@ require_once('templates/head.php');
           require_once('templates/admin_nav.php');
 
           ?>
-          <div class="row">
+          <div class="row d-flex justify-content-around">
             <div class="col-md-5 mt-5">
               <?php
               include('templates/admin_panel_opinions.php');
+              ?>
+            </div>
+            <div class="col-md-5 mt-5">
+              <?php
+              include('templates/admin_panel_messaging.php');
               ?>
             </div>
           </div>
@@ -47,7 +52,7 @@ require_once('templates/head.php');
         <?php
         if ($role === 'administrateur') {
         ?>
-          <div class="row">
+          <div class="row d-flex justify-content-around>
             <div class="col-md-5 mt-5">
               <?php
               include('templates/admin_panel_account_management.php');

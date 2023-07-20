@@ -1,7 +1,7 @@
 -- Database initialization
 
 -- CREATE DATABASE vparrot_bdd;
--- USE vparrot_bdd;
+USE vparrot_bdd;
 
 -- Create OpinionsTable ---
 
@@ -189,5 +189,18 @@
   -- ('sparrot', '1234', 'sparrot@parrot.com', 'Parrot', 'Sebastien', 'employe');
 
 -- ALTER TABLE OpinionsTable ADD COLUMN `note` INT(11) NOT NULL DEFAULT 0;
-ALTER TABLE OpinionsTable ADD COLUMN publish BOOLEAN NOT NULL DEFAULT 0;
+-- ALTER TABLE OpinionsTable ADD COLUMN publish BOOLEAN NOT NULL DEFAULT 0;
 
+  -- DROP TABLE IF EXISTS `messaging`;
+  -- CREATE TABLE messaging(
+  --   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  --   `phoneNumber` varchar(255) NOT NULL,
+  --   `email` varchar(255) NOT NULL,
+  --   `last_name` varchar(255) NOT NULL,
+  --   `first_name` varchar(255) NOT NULL,
+  --   `sending_date` DATETIME,
+  --   `message` text NOT NULL,
+  --   PRIMARY KEY (`id`)
+  -- )
+
+  ALTER TABLE messaging DROP COLUMN sending_date;
