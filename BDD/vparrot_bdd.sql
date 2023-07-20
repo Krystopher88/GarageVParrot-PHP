@@ -1,7 +1,7 @@
 -- Database initialization
 
 -- CREATE DATABASE vparrot_bdd;
-USE vparrot_bdd;
+-- USE vparrot_bdd;
 
 -- Create OpinionsTable ---
 
