@@ -8,3 +8,4 @@
 <script src="./assets/JS/form_create_user.js"></script>
 <script defer src="./assets/JS/form_update_user.js"></script>
 <script defer src="./assets/JS/form_update_vehicle.js"></script>
+<script defer src="./assets/JS/update_Publish_opinion.js"></script>

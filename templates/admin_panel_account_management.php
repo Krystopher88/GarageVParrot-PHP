@@ -25,6 +25,6 @@ $employees = getAllUsers($pdo, 3);
   </tbody>
 </table>
 
-<button class="btn btn-primary"><a href="admin_account_management.php">Gérer</a></button>
+<button class="btn btn-primary"><a href="admin_account_management.php">Gérer les employés</a></button>
 
 

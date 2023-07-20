@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require_once('lib/pdo.php');
+
 ?>
 
 <?php
@@ -27,41 +27,22 @@ require_once('templates/head.php');
       require_once('templates/admin_login.php');
     } else {
       $role = $_SESSION['user']['role'];
-
-      if ($role === 'administrateur' or $role === 'employe') {
     ?>
-        <div>
-          <?php
-          require_once('templates/admin_nav.php');
-
-          ?>
-          <div class="row">
-            <div class="col-md-5 mt-5">
-              <?php
-              include('templates/admin_panel_opinions.php');
-              ?>
-            </div>
-          </div>
-
-        </div>
+      <div>
         <?php
-        if ($role === 'administrateur') {
+        require_once('templates/admin_nav.php');
         ?>
-          <div class="row">
-            <div class="col-md-5 mt-5">
-              <?php
-              include('templates/admin_panel_account_management.php');
-              ?>
-            </div>
-          </div>
+      </div>
+      <div class="row">
+        <div class="mt-5">
+          <?php
+          include('templates/admin_panel_opinions_all.php');
+          ?>
+        </div>
+      </div>
     <?php
-        }
-      }
     }
     ?>
-
-
-
   </main>
   <!-- MAIN END -->
   <!-- FOOTER START -->

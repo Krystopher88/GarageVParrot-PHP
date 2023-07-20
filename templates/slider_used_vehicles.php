@@ -1,6 +1,5 @@
 <?php
 $UsedVehiculeSliders = getImportUsedVehicle($pdo);
-var_dump($defaultImage);
 ?>
 
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">

@@ -1,7 +1,7 @@
 -- Database initialization
 
 -- CREATE DATABASE vparrot_bdd;
-USE vparrot_bdd;
+-- USE vparrot_bdd;
 
 -- Create OpinionsTable ---
 
@@ -188,5 +188,6 @@ USE vparrot_bdd;
   -- ('vparrot', 'admin', 'vparrot@parrot.com', 'Parrot', 'Vincent', 'administrateur'),
   -- ('sparrot', '1234', 'sparrot@parrot.com', 'Parrot', 'Sebastien', 'employe');
 
-ALTER TABLE OpinionsTable ADD COLUMN `note` INT(11) NOT NULL DEFAULT 0;
+-- ALTER TABLE OpinionsTable ADD COLUMN `note` INT(11) NOT NULL DEFAULT 0;
+ALTER TABLE OpinionsTable ADD COLUMN publish BOOLEAN NOT NULL DEFAULT 0;
 

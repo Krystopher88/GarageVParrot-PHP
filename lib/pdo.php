@@ -32,6 +32,57 @@ function getImportComments(PDO $pdo, int $limit = null)
   return $query->fetchAll();
 }
 
+function getPublishedImportOpinions(PDO $pdo, int $limit = null)
+{
+  $sql = 'SELECT * FROM OpinionsTable WHERE publish = 1 ORDER BY id DESC';
+
+  if ($limit) {
+    $sql .= ' LIMIT :limit';
+  }
+
+  $query = $pdo->prepare($sql);
+
+  if ($limit) {
+    $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+  }
+
+  $query->execute();
+  return $query->fetchAll();
+}
+
+function deleteOpinions(PDO $pdo, int $Id)
+{
+  $sql = 'DELETE FROM OpinionsTable WHERE id = :Id';
+
+  $query = $pdo->prepare($sql);
+  $query->bindParam(':Id', $Id, PDO::PARAM_INT);
+
+  if ($query->execute()) {
+    // Suppression réussie
+    return true;
+  } else {
+    // Erreur lors de la suppression
+    return false;
+  }
+}
+
+function updateOpinionPublish(PDO $pdo, int $opinionId, int $publish)
+{
+  $sql = 'UPDATE OpinionsTable SET publish = :publish WHERE id = :opinionId';
+
+  $query = $pdo->prepare($sql);
+  $query->bindParam(':publish', $publish, PDO::PARAM_INT);
+  $query->bindParam(':opinionId', $opinionId, PDO::PARAM_INT);
+
+  return $query->execute();
+}
+
+if (isset($_GET['error']) && $_GET['error'] === '1') {
+  // Afficher un message d'erreur
+  echo '<div class="alert alert-danger" role="alert">Une erreur s\'est produite lors de la mise à jour de l\'utilisateur.</div>';
+}
+
+
 
 // Import Comments End
 
@@ -373,3 +424,29 @@ function getVehicleById(PDO $pdo, $id) {
   return $query->fetch(PDO::FETCH_ASSOC);
 }
 
+function insertComment(PDO $pdo, $name, $opinion, $note)
+{
+    // Vérifier si la note est comprise entre 1 et 5
+    if ($note < 1 || $note > 5) {
+        throw new InvalidArgumentException("La note doit être comprise entre 1 et 5.");
+    }
+
+    // Préparer la requête SQL
+    $sql = 'INSERT INTO OpinionsTable (name, opinion, note) VALUES (:name, :opinion, :note)';
+    $query = $pdo->prepare($sql);
+
+    // Lier les paramètres de la requête
+    $query->bindParam(':name', $name, PDO::PARAM_STR);
+    $query->bindParam(':opinion', $opinion, PDO::PARAM_STR);
+    $query->bindParam(':note', $note, PDO::PARAM_INT);
+
+    // Exécuter la requête
+    try {
+        $query->execute();
+        return true; // Retourner true si l'insertion a réussi
+    } catch (PDOException $e) {
+        // Gérer l'erreur si l'insertion échoue
+        echo "Erreur lors de l'insertion de l'opinion : " . $e->getMessage();
+        return false; // Retourner false en cas d'erreur
+    }
+}

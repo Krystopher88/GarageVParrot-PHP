@@ -16,10 +16,13 @@
           if ($role === 'administrateur' or $role === 'employe') {
           ?>
               <li class="nav-item">
-                <a class="nav-link" href="#">Gestions des avis</a>
+                <a class="nav-link" href="admin_management_opinion.php">Avis</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="admin_used_vehicled.php">Gestions des Véhicules</a>
+                <a class="nav-link" href="admin_used_vehicled.php">Véhicules</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Messagerie</a>
               </li>
             <?php
             if ($role === 'administrateur') {
@@ -28,10 +31,10 @@
                 <a class="nav-link" href="admin_openinghours.php">Gestions des Jours et horaires d'ouvertures</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="admin_account_management.php">Gestions du personnels</a>
+                <a class="nav-link" href="admin_account_management.php">Employés</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Gestions des services</a>
+                <a class="nav-link" href="#">Services</a>
               </li>
           <?php
             }

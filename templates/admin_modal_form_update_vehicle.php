@@ -38,7 +38,7 @@
                   </div>
                   <div class="col-md-6">
                     <label for="model" class="form-label">Modèle</label>
-                    <input type="text" class="form-control" name="model" id="editVehicleModel" placeholder="<?= $vehicle['model'] ?>" required>
+                    <input type="text" class="form-control" name="model" id="editvehicleModel" placeholder="<?= $vehicle['model'] ?>" required>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-md-6">
                     <label for="fuel_type" class="form-label">Type de carburant</label>
-                    <input type="text" class="form-control" name="fuel_type" id="editVehicleFuelType" placeholder="<?= $vehicle['fuel_type'] ?>" required>
+                    <input type="text" class="form-control" name="fuel_type" id="editVehicleFueltype" placeholder="<?= $vehicle['fuel_type'] ?>" required>
                   </div>
                 </div>
                 <div class="row mb-3">
